@@ -1,0 +1,85 @@
+@reference "../../../app/globals.css";
+
+.hero {
+    @apply flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10;
+
+    .title {
+        @apply text-5xl font-headline font-bold text-on-surface tracking-tight mb-2;
+    }
+
+    .subtitle {
+        @apply text-on-surface-variant font-body text-lg max-w-xl;
+    }
+
+    .actions {
+        @apply flex gap-3;
+
+        .btnSecondary {
+            @apply bg-surface-container-highest px-6 py-3 font-label uppercase tracking-widest text-xs hover:bg-surface-container-high transition-colors rounded-sm;
+        }
+
+        .btnPrimary {
+            @apply bg-primary text-on-primary px-8 py-3 font-label uppercase tracking-widest text-xs shadow-lg hover:opacity-90 transition-opacity rounded-sm;
+        }
+    }
+}
+
+.grid {
+    @apply grid grid-cols-1 md:grid-cols-4 gap-4;
+}
+
+.card {
+    @apply bg-surface-container-low p-6 flex flex-col justify-between h-40 rounded-sm;
+
+    &.primary {
+        @apply bg-primary-container;
+
+        .title {
+            @apply text-secondary-fixed-dim;
+        }
+
+        .content {
+            @apply text-on-primary;
+        }
+
+        .value {
+            @apply text-on-primary;
+        }
+    }
+
+    .title {
+        @apply font-label text-[10px] uppercase tracking-widest text-secondary font-bold block;
+    }
+
+    .content {
+        @apply mt-auto;
+    }
+
+    .value {
+        @apply text-4xl font-headline font-medium;
+    }
+
+    .stats {
+        @apply flex items-center gap-1 mt-1;
+
+        &.positive {
+            @apply text-emerald-600;
+        }
+
+        &.neutral {
+            @apply text-on-surface-variant;
+        }
+        
+        &.accent {
+            @apply text-secondary-fixed;
+        }
+
+        .icon {
+            @apply text-xs;
+        }
+
+        .label {
+            @apply font-label text-[10px] font-bold;
+        }
+    }
+}

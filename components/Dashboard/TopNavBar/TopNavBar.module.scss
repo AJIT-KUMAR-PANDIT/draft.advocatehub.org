@@ -1,0 +1,61 @@
+@reference "../../../app/globals.css";
+
+.header {
+    @apply sticky top-0 z-50 bg-surface/90 backdrop-blur-md flex justify-between items-center w-full px-8 h-16 max-w-full;
+}
+
+.leftSection {
+    @apply flex items-center gap-8;
+
+    .logo {
+        @apply text-2xl font-black text-on-surface font-headline tracking-tight;
+    }
+
+    .searchBox {
+        @apply relative hidden lg:block;
+        
+        .icon {
+            @apply absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant;
+        }
+
+        .input {
+            @apply bg-surface-container-low border-none focus:ring-0 text-sm pl-10 pr-4 py-1.5 w-64 rounded-sm outline-none;
+        }
+    }
+}
+
+.rightSection {
+    @apply flex items-center gap-6;
+
+    .nav {
+        @apply hidden md:flex gap-6 items-center;
+
+        .link {
+            @apply text-slate-500 font-medium hover:text-secondary transition-colors duration-200;
+        }
+    }
+
+    .actions {
+        @apply flex items-center gap-4 border-l border-outline-variant/30 pl-6;
+
+        .iconBtn {
+            @apply text-on-surface relative;
+
+            .badge {
+                @apply absolute top-0 right-0 w-2 h-2 bg-error rounded-full border-2 border-surface;
+            }
+
+            .icon {
+                @apply inline-block;
+            }
+        }
+
+        .avatar {
+            @apply w-8 h-8 bg-surface-container-highest rounded-full overflow-hidden border border-outline-variant/20 block;
+            
+            img {
+                @apply w-full h-full object-cover;
+            }
+        }
+    }
+}

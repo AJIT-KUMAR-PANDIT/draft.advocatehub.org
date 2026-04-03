@@ -1,0 +1,47 @@
+@reference "../../../app/globals.css";
+
+.sidebar {
+    @apply hidden md:flex flex-col h-full py-6 px-4 fixed left-0 top-0 w-64 border-r border-outline-variant/15 bg-surface-container z-40;
+}
+
+.brand {
+    @apply mb-10 px-2;
+    .title {
+        @apply font-headline italic text-secondary text-2xl block;
+    }
+    .subtitle {
+        @apply font-label uppercase tracking-widest text-[10px] mt-1 text-on-surface-variant block;
+    }
+}
+
+.nav {
+    @apply space-y-1 flex-1;
+    
+    .navItem {
+        @apply flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface transition-all rounded-sm;
+        
+        &.active {
+            @apply text-on-surface font-bold bg-surface-container-lowest scale-[1.02];
+        }
+
+        .icon {
+            @apply inline-block;
+        }
+
+        .label {
+            @apply font-label uppercase tracking-widest text-xs;
+        }
+    }
+}
+
+.footer {
+    @apply mt-auto space-y-4 pt-6 border-t border-outline-variant/20;
+
+    .newButton {
+        @apply w-full bg-primary text-on-primary py-3 px-4 font-label uppercase tracking-widest text-xs flex items-center justify-center gap-2 hover:opacity-90 transition-opacity rounded-sm;
+    }
+
+    .footerLinks {
+        @apply space-y-1;
+    }
+}

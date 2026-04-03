@@ -1,0 +1,149 @@
+@reference "../../../app/globals.css";
+
+.section {
+    @apply mb-12;
+
+    .header {
+        @apply flex items-center justify-between mb-6;
+
+        .title {
+            @apply font-headline text-2xl font-bold;
+        }
+
+        .viewAll {
+            @apply text-secondary font-label text-xs uppercase tracking-widest hover:underline;
+        }
+    }
+}
+
+.grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+}
+
+.draftCard {
+    @apply bg-surface-container-lowest p-6 border border-outline-variant/10 transition-all rounded-sm hover:border-secondary/30;
+
+    &:hover .topHeader .icon {
+        @apply opacity-100;
+    }
+
+    .topHeader {
+        @apply flex justify-between items-start mb-4;
+
+        .badge {
+            @apply font-label text-[10px] text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-sm;
+        }
+
+        .icon {
+            @apply text-secondary opacity-0 transition-opacity;
+        }
+    }
+
+    .title {
+        @apply font-headline text-xl font-bold mb-1;
+    }
+
+    .subtitle {
+        @apply font-body text-sm text-on-surface-variant mb-6 italic;
+    }
+
+    .progressSection {
+        @apply space-y-3;
+
+        .labels {
+            @apply flex justify-between text-[10px] font-label uppercase tracking-widest;
+        }
+        
+        .track {
+            @apply h-1.5 w-full bg-surface-container-highest rounded-sm overflow-hidden;
+            
+            .fill {
+                @apply h-full bg-primary;
+            }
+        }
+
+        .steps {
+            @apply flex gap-1;
+
+            .step {
+                @apply w-full h-1 bg-surface-container rounded-sm;
+
+                &.active {
+                    @apply bg-primary;
+                }
+            }
+        }
+    }
+}
+
+.tableSection {
+    @apply bg-surface-container-lowest border border-outline-variant/10 overflow-hidden rounded-sm;
+
+    .table {
+        @apply w-full text-left font-body;
+    }
+
+    .thead {
+        @apply bg-surface-container-low border-b border-outline-variant/10;
+
+        th {
+            @apply px-6 py-4 font-label uppercase text-[10px] tracking-widest text-on-surface-variant;
+        }
+    }
+
+    .tbody {
+        @apply divide-y divide-outline-variant/10;
+
+        tr {
+            @apply hover:bg-surface-container-low transition-colors;
+
+            td {
+                @apply px-6 py-4;
+
+                &.name {
+                    @apply font-bold text-on-surface;
+                }
+
+                &.type {
+                    @apply text-on-surface-variant text-sm;
+                }
+
+                &.actions {
+                    @apply text-right;
+
+                    .btn {
+                        @apply text-primary hover:text-secondary;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.statusWrapper {
+    @apply flex items-center gap-2 text-sm;
+
+    .dot {
+        @apply w-2 h-2 rounded-full;
+
+        &.submitted {
+            @apply bg-secondary-container;
+        }
+
+        &.review {
+            @apply bg-primary-container;
+        }
+    }
+}
+
+.urgencyBadge {
+    @apply px-3 py-1 text-[10px] font-label font-bold uppercase rounded-sm;
+
+    &.priority {
+        @apply bg-error-container text-on-error-container;
+    }
+
+    &.standard {
+        @apply bg-surface-container-highest text-on-surface-variant;
+    }
+}
