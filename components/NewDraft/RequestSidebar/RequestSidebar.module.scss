@@ -1,0 +1,64 @@
+@reference "../../../app/globals.css";
+
+.sidebar {
+    @apply w-full lg:w-96 bg-surface-container border-l border-outline-variant/10 p-8 lg:p-12 overflow-y-auto;
+}
+
+.sticky {
+    @apply sticky top-12;
+}
+
+.title {
+    @apply font-headline text-xl mb-8;
+}
+
+.stack {
+    @apply space-y-8;
+}
+
+/* Summary cards */
+.summaryCard {
+    @apply p-6 bg-surface-container-lowest rounded-md;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+
+    .cardTag {
+        @apply font-label text-[10px] text-secondary uppercase tracking-[0.2em];
+    }
+
+    .cardRows {
+        @apply mt-4 space-y-4;
+    }
+
+    .cardRow {
+        @apply flex justify-between items-baseline border-b border-outline-variant/10 pb-2;
+
+        .rowLabel { @apply text-xs text-on-surface-variant; }
+        .rowValue { @apply text-sm font-semibold; }
+        .rowValueAccent { @apply text-sm font-semibold text-secondary; }
+    }
+}
+
+.pendingCard {
+    @apply p-6 border border-dashed border-outline-variant/40 rounded-md;
+
+    .pendingTag { @apply font-label text-[10px] text-on-surface-variant uppercase tracking-[0.2em]; }
+    .pendingText { @apply text-xs italic text-on-surface-variant/60 mt-2; }
+}
+
+/* AI card */
+.aiCard {
+    @apply mt-12 bg-primary-container p-6 rounded-lg relative overflow-hidden;
+
+    .aiContent {
+        @apply relative z-10;
+
+        .aiIcon { @apply text-secondary mb-2; }
+        .aiTitle { @apply text-on-primary font-headline text-lg italic; }
+        .aiDesc { @apply text-primary-fixed-dim text-xs mt-2 leading-relaxed; }
+    }
+
+    .aiBall {
+        @apply absolute -right-4 -bottom-4 w-24 h-24 rounded-full blur-2xl;
+        background: rgba(255,255,255,0.05);
+    }
+}

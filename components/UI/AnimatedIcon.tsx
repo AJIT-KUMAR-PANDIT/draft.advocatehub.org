@@ -39,6 +39,10 @@ import {
   CircleCheck,
   CircleAlert,
   Circle,
+  ChevronDown,
+  ArrowLeft,
+  Lightbulb,
+  HelpCircle as Help,
   type LucideIcon
 } from 'lucide-react';
 
@@ -81,6 +85,10 @@ const ICON_MAP: Record<string, LucideIcon> = {
   check_circle: CircleCheck,
   error: CircleAlert,
   radio_button_unchecked: Circle,
+  expand_more: ChevronDown,
+  arrow_back: ArrowLeft,
+  lightbulb: Lightbulb,
+  help: Help,
 };
 
 // Map icons to specific bespoke hover animations

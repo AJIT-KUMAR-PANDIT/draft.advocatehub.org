@@ -1,0 +1,50 @@
+@reference "../../../app/globals.css";
+
+.header {
+    @apply bg-surface fixed top-0 z-50 w-full h-16 flex justify-between items-center px-8 border-b border-outline-variant/20;
+}
+
+.leftSection {
+    @apply flex items-center gap-8;
+
+    .brand {
+        @apply text-2xl font-black text-on-surface font-headline tracking-tight;
+    }
+
+    .nav {
+        @apply hidden md:flex items-center gap-6 ml-4;
+
+        .navItemActive {
+            @apply text-on-surface border-b-2 border-secondary pb-1 cursor-default font-headline font-medium;
+        }
+
+        .navItem {
+            @apply text-on-surface-variant font-headline font-medium hover:text-secondary transition-colors duration-200 cursor-pointer;
+        }
+    }
+}
+
+.stepIndicator {
+    @apply absolute left-1/2 -translate-x-1/2 flex items-center gap-3;
+
+    .stepLabel {
+        @apply font-label text-[10px] uppercase tracking-[0.2em] text-secondary;
+    }
+
+    .stepTitle {
+        @apply text-on-surface font-headline italic text-lg;
+    }
+}
+
+.rightSection {
+    @apply flex items-center gap-4;
+
+    .iconBtn {
+        @apply text-on-surface-variant cursor-pointer opacity-90 active:scale-95 transition-all;
+    }
+
+    .avatar {
+        @apply w-8 h-8 rounded-sm object-cover border border-outline-variant/20 block overflow-hidden;
+        img { @apply w-full h-full object-cover; }
+    }
+}

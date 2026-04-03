@@ -39,10 +39,10 @@ export default function Sidebar({ activeTab = 'dashboard' }: SidebarProps) {
             </nav>
             
             <div className={styles.footer}>
-                <button className={styles.newButton}>
+                <Link href="/new-draft" className={styles.newButton}>
                     <AnimatedIcon icon="add" className={styles.icon} />
                     New Draft
-                </button>
+                </Link>
                 <div className={styles.footerLinks}>
                     <Link href="#" className={styles.navItem}>
                         <AnimatedIcon icon="help_outline" className={styles.icon} />

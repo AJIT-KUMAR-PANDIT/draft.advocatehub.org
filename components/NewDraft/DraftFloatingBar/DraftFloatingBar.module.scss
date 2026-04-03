@@ -1,0 +1,21 @@
+@reference "../../../app/globals.css";
+
+.toolbar {
+    @apply fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 bg-surface/85 backdrop-blur-md px-4 py-3 rounded-xl border border-outline-variant/10;
+    box-shadow: 0 12px 40px rgba(28,28,25,0.06);
+}
+
+.actionBtn {
+    @apply flex items-center gap-2 px-4 py-2 hover:bg-surface-container rounded-lg transition-all text-on-surface-variant cursor-pointer;
+    .icon { @apply group-hover:scale-110 transition-transform; }
+    .label { @apply font-label text-[10px] uppercase tracking-widest; }
+}
+
+.primaryBtn {
+    @apply flex items-center gap-2 px-6 py-2 bg-secondary text-on-secondary rounded-lg transition-all shadow-sm hover:brightness-110 active:scale-95 cursor-pointer;
+    .label { @apply font-label text-[10px] uppercase tracking-widest font-bold; }
+}
+
+.divider {
+    @apply w-px h-4 bg-outline-variant/20 mx-2;
+}

@@ -1,0 +1,28 @@
+@reference "../../app/globals.css";
+
+.root {
+    @apply bg-background text-on-background min-h-screen;
+}
+
+.body {
+    @apply flex pt-16 min-h-screen;
+}
+
+.main {
+    @apply flex-1 ml-0 md:ml-64 flex flex-col lg:flex-row bg-surface;
+}
+
+/* Mobile Nav */
+.mobileNav {
+    @apply md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-16 pb-[env(safe-area-inset-bottom)] bg-surface/80 backdrop-blur-md border-t border-outline-variant z-50;
+
+    .navItem {
+        @apply flex flex-col items-center text-on-surface-variant active:scale-95 transition-transform duration-150 cursor-pointer gap-0.5;
+        .label { @apply font-label text-[10px] font-medium; }
+    }
+
+    .navItemActive {
+        @apply flex flex-col items-center text-on-surface font-bold active:scale-95 transition-transform duration-150 cursor-pointer gap-0.5;
+        .label { @apply font-label text-[10px]; }
+    }
+}
