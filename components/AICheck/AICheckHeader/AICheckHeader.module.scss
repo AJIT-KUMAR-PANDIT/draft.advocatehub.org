@@ -1,0 +1,46 @@
+@reference "../../../app/globals.css";
+
+.header {
+    @apply fixed top-0 z-50 w-full h-16 bg-surface flex justify-between items-center px-8 border-b border-surface-container-highest;
+}
+
+.leftSection {
+    @apply flex items-center gap-8;
+
+    .brand {
+        @apply text-2xl font-black text-on-surface font-headline tracking-tight;
+    }
+
+    .divider {
+        @apply h-6 w-px bg-outline-variant;
+    }
+
+    .docTitle {
+        @apply font-headline font-bold text-lg text-primary truncate max-w-md;
+    }
+}
+
+.rightSection {
+    @apply flex items-center gap-4;
+
+    .exportBtn {
+        @apply flex items-center gap-2 px-4 py-1.5 rounded-lg border border-outline-variant text-sm font-label uppercase tracking-wider opacity-50 cursor-not-allowed;
+    }
+
+    .exportBtnPrimary {
+        @apply flex items-center gap-2 px-4 py-1.5 rounded-lg bg-primary text-on-primary text-sm font-label uppercase tracking-wider opacity-50 cursor-not-allowed;
+    }
+
+    .iconGroup {
+        @apply flex items-center gap-2 ml-4;
+
+        .iconBtn {
+            @apply text-on-surface-variant p-2 hover:bg-surface-container rounded-full transition-colors cursor-pointer;
+        }
+
+        .avatar {
+            @apply w-8 h-8 rounded-full overflow-hidden ml-2 border border-outline-variant block;
+            img { @apply w-full h-full object-cover; }
+        }
+    }
+}

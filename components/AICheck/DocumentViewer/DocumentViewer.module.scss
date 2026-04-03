@@ -1,0 +1,69 @@
+@reference "../../../app/globals.css";
+
+.area {
+    @apply flex-1 overflow-y-auto bg-surface;
+    scrollbar-width: thin;
+    scrollbar-color: #c4c6cc #f0ede9;
+    &::-webkit-scrollbar { width: 4px; }
+    &::-webkit-scrollbar-track { background: #f0ede9; }
+    &::-webkit-scrollbar-thumb { background: #c4c6cc; }
+}
+
+.inner {
+    @apply max-w-4xl mx-auto py-16 px-12;
+}
+
+.paper {
+    @apply bg-surface-container-lowest shadow-sm p-16 min-h-[1056px] border border-surface-container;
+}
+
+.docHeader {
+    @apply mb-12 border-b border-outline-variant pb-8;
+
+    .sectionLabel {
+        @apply font-label text-xs text-secondary mb-2 block tracking-widest;
+    }
+
+    .docTitle {
+        @apply font-headline text-4xl font-bold text-on-surface leading-tight;
+    }
+}
+
+.body {
+    @apply space-y-8 text-on-surface leading-relaxed text-lg font-body;
+}
+
+/* Inline highlights */
+.plagHighlight {
+    background: linear-gradient(to bottom, transparent 60%, rgba(186, 26, 26, 0.12) 60%);
+    border-bottom: 2px solid #ba1a1a;
+    position: relative;
+    cursor: pointer;
+}
+
+.grammarOld {
+    text-decoration: line-through;
+    color: #74777d;
+    font-style: italic;
+}
+
+.grammarNew {
+    color: #755b00;
+    font-weight: 600;
+    background-color: #ffe08f;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+/* AI observation callout */
+.aiNote {
+    @apply p-6 bg-surface-container-low border-l-4 border-secondary my-8;
+
+    .noteLabel {
+        @apply font-label text-[10px] uppercase tracking-widest text-secondary block mb-2;
+    }
+
+    .noteText {
+        @apply text-sm italic text-on-surface-variant font-medium;
+    }
+}

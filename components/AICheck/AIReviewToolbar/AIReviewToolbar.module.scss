@@ -1,0 +1,24 @@
+@reference "../../../app/globals.css";
+
+.toolbar {
+    @apply fixed bottom-8 left-1/2 -translate-x-1/2 w-fit bg-surface/85 backdrop-blur-xl border border-outline-variant/30 px-6 py-3 rounded-full flex items-center gap-6 shadow-2xl z-50;
+}
+
+.branding {
+    @apply flex items-center gap-2 border-r border-outline-variant/30 pr-6;
+
+    .icon { @apply text-secondary; }
+    .label { @apply font-label text-xs uppercase tracking-widest font-bold; }
+}
+
+.actions {
+    @apply flex gap-4;
+
+    .btn {
+        @apply flex items-center gap-2 text-sm font-medium hover:text-secondary transition-colors cursor-pointer;
+    }
+
+    .btnPrimary {
+        @apply flex items-center gap-2 text-sm font-medium text-secondary hover:underline transition-all cursor-pointer;
+    }
+}

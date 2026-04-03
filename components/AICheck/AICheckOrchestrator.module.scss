@@ -1,0 +1,13 @@
+@reference "../../app/globals.css";
+
+.layout {
+    @apply flex min-h-screen bg-background;
+}
+
+.shell {
+    @apply flex pt-16 h-screen overflow-hidden w-full;
+}
+
+.main {
+    @apply ml-64 mr-80 flex-1 overflow-hidden flex flex-col;
+}

@@ -30,6 +30,15 @@ import {
   ZoomIn,
   Mic,
   Pause,
+  FileDown,
+  FileType2,
+  Scale,
+  Paintbrush,
+  ClipboardList,
+  CheckSquare,
+  CircleCheck,
+  CircleAlert,
+  Circle,
   type LucideIcon
 } from 'lucide-react';
 
@@ -63,6 +72,15 @@ const ICON_MAP: Record<string, LucideIcon> = {
   zoom_in: ZoomIn,
   keyboard_voice: Mic,
   pause: Pause,
+  picture_as_pdf: FileDown,
+  format_paint: Paintbrush,
+  summarize: ClipboardList,
+  add_task: CheckSquare,
+  done_all: CheckSquare,
+  balance: Scale,
+  check_circle: CircleCheck,
+  error: CircleAlert,
+  radio_button_unchecked: Circle,
 };
 
 // Map icons to specific bespoke hover animations

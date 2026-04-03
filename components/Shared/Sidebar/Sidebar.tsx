@@ -28,7 +28,7 @@ export default function Sidebar({ activeTab = 'dashboard' }: SidebarProps) {
                     <AnimatedIcon icon="edit_note" className={styles.icon} />
                     <span className={styles.label}>Drafting Room</span>
                 </Link>
-                <Link href="#" className={`${styles.navItem} ${activeTab === 'ai_insights' ? styles.active : ''}`}>
+                <Link href="/ai-check" className={`${styles.navItem} ${activeTab === 'ai_insights' ? styles.active : ''}`}>
                     <AnimatedIcon icon="auto_awesome" className={styles.icon} />
                     <span className={styles.label}>AI Insights</span>
                 </Link>
