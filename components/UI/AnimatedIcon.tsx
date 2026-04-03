@@ -25,6 +25,11 @@ import {
   User,
   FileSearch,
   Wand2,
+  Save,
+  Printer,
+  ZoomIn,
+  Mic,
+  Pause,
   type LucideIcon
 } from 'lucide-react';
 
@@ -32,6 +37,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   dashboard: LayoutDashboard,
   folder_open: FolderOpen,
   edit_note: FileEdit,
+  edit: FileEdit,
   auto_awesome: Sparkles,
   inventory_2: Archive,
   add: Plus,
@@ -51,6 +57,12 @@ const ICON_MAP: Record<string, LucideIcon> = {
   person: User,
   search_check: FileSearch,
   auto_fix: Wand2,
+  auto_fix_high: Wand2,
+  save: Save,
+  print: Printer,
+  zoom_in: ZoomIn,
+  keyboard_voice: Mic,
+  pause: Pause,
 };
 
 // Map icons to specific bespoke hover animations
@@ -63,8 +75,12 @@ const getHoverAnimation = (iconKey: string) => {
     case 'trending_up': return { y: -3, x: 3, scale: 1.1 };
     case 'trending_down': return { y: 3, x: 3, scale: 1.1 };
     case 'auto_awesome': 
-    case 'auto_fix': return { scale: 1.2, rotate: 15 };
+    case 'auto_fix':
+    case 'auto_fix_high': return { scale: 1.2, rotate: 15 };
     case 'folder_open': return { scale: 1.1, rotate: -5 };
+    case 'keyboard_voice': return { scale: 1.2, rotate: [-5, 5, -5, 5, 0], transition: { duration: 0.5 } };
+    case 'save':
+    case 'print': return { scale: 1.15, y: -2 };
     default: return { scale: 1.15 };
   }
 };

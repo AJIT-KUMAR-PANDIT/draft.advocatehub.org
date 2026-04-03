@@ -3,7 +3,11 @@ import styles from './Sidebar.module.scss';
 import Link from 'next/link';
 import AnimatedIcon from '@nakprc/components/UI/AnimatedIcon';
 
-export default function Sidebar() {
+interface SidebarProps {
+    activeTab?: 'dashboard' | 'case_files' | 'drafting_room' | 'ai_insights' | 'archive';
+}
+
+export default function Sidebar({ activeTab = 'dashboard' }: SidebarProps) {
     return (
         <aside className={styles.sidebar}>
             <div className={styles.brand}>
@@ -12,23 +16,23 @@ export default function Sidebar() {
             </div>
             
             <nav className={styles.nav}>
-                <Link href="#" className={`${styles.navItem} ${styles.active}`}>
+                <Link href="/dashboard" className={`${styles.navItem} ${activeTab === 'dashboard' ? styles.active : ''}`}>
                     <AnimatedIcon icon="dashboard" className={styles.icon} />
                     <span className={styles.label}>Dashboard</span>
                 </Link>
-                <Link href="#" className={styles.navItem}>
+                <Link href="#" className={`${styles.navItem} ${activeTab === 'case_files' ? styles.active : ''}`}>
                     <AnimatedIcon icon="folder_open" className={styles.icon} />
                     <span className={styles.label}>Case Files</span>
                 </Link>
-                <Link href="#" className={styles.navItem}>
+                <Link href="/editor" className={`${styles.navItem} ${activeTab === 'drafting_room' ? styles.active : ''}`}>
                     <AnimatedIcon icon="edit_note" className={styles.icon} />
                     <span className={styles.label}>Drafting Room</span>
                 </Link>
-                <Link href="#" className={styles.navItem}>
+                <Link href="#" className={`${styles.navItem} ${activeTab === 'ai_insights' ? styles.active : ''}`}>
                     <AnimatedIcon icon="auto_awesome" className={styles.icon} />
                     <span className={styles.label}>AI Insights</span>
                 </Link>
-                <Link href="#" className={styles.navItem}>
+                <Link href="#" className={`${styles.navItem} ${activeTab === 'archive' ? styles.active : ''}`}>
                     <AnimatedIcon icon="inventory_2" className={styles.icon} />
                     <span className={styles.label}>Archive</span>
                 </Link>

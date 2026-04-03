@@ -1,0 +1,49 @@
+@reference "../../../app/globals.css";
+
+.container {
+    @apply flex-1 bg-surface-container-lowest rounded-xl border border-outline-variant/30 flex flex-col relative;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.03); /* from generic .document-shadow */
+}
+
+.header {
+    @apply p-4 border-b border-outline-variant/50 flex justify-between items-center;
+
+    .title {
+        @apply font-label uppercase text-xs tracking-widest text-on-surface-variant;
+    }
+
+    .actions {
+        @apply flex gap-4;
+
+        .icon {
+            @apply text-on-surface-variant cursor-pointer text-lg hover:text-on-surface transition-colors;
+        }
+    }
+}
+
+.documentArea {
+    @apply flex-1 p-12 overflow-y-auto;
+}
+
+.paper {
+    @apply max-w-[600px] mx-auto text-[15px] leading-[1.8] text-on-surface;
+    font-family: 'Newsreader', serif;
+    text-align: justify;
+    text-justify: inter-word; /* from generic .legal-justify */
+
+    .docTitle {
+        @apply text-center font-bold text-xl uppercase mb-12 tracking-widest underline;
+    }
+
+    .paragraph {
+        @apply mb-8;
+        
+        .sectionLabel {
+            @apply font-bold;
+        }
+    }
+
+    .draftingText {
+        @apply mb-8 italic text-on-surface-variant;
+    }
+}

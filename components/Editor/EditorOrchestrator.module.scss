@@ -1,0 +1,34 @@
+@reference "../../app/globals.css";
+
+.layout {
+    @apply flex min-h-screen bg-background;
+}
+
+.mainContent {
+    @apply flex-1 flex flex-col min-h-screen md:pl-64 w-full;
+}
+
+.workspace {
+    @apply flex-1 flex max-w-[1400px] mx-auto w-full p-6 gap-6 relative;
+}
+
+/* Mobile Nav - reused from Dashboard */
+.mobileNav {
+    @apply md:hidden fixed bottom-0 left-0 w-full bg-surface/80 backdrop-blur-md flex justify-around items-center h-16 pb-[env(safe-area-inset-bottom)] z-50 border-t border-outline-variant;
+
+    .navItem {
+        @apply flex flex-col items-center text-slate-400 hover:text-on-surface transition-colors;
+    }
+
+    .navItemActive {
+        @apply flex flex-col items-center text-primary font-bold;
+    }
+
+    .icon {
+        @apply text-[24px];
+    }
+
+    .label {
+        @apply font-label text-[10px] font-medium;
+    }
+}

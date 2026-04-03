@@ -1,0 +1,25 @@
+@reference "../../../app/globals.css";
+
+.toolbar {
+    @apply fixed bottom-10 left-1/2 -translate-x-1/2 z-50 bg-surface/80 backdrop-blur-xl border border-outline-variant/30 px-6 py-3 rounded-full flex items-center gap-6 shadow-2xl;
+}
+
+.actionBtn {
+    @apply flex items-center gap-2 text-on-surface-variant hover:text-on-surface transition-colors font-label uppercase text-[10px] tracking-widest font-bold cursor-pointer;
+
+    .icon {
+        @apply text-lg;
+    }
+}
+
+.actionBtnPrimary {
+    @apply flex items-center gap-2 text-secondary hover:text-on-secondary-container transition-colors font-label uppercase text-[10px] tracking-widest font-bold cursor-pointer;
+
+    .icon {
+        @apply text-lg;
+    }
+}
+
+.divider {
+    @apply w-px h-4 bg-outline-variant;
+}

@@ -1,0 +1,51 @@
+@reference "../../../app/globals.css";
+
+.sidebar {
+    @apply w-72 flex flex-col gap-6;
+}
+
+.card {
+    @apply bg-surface-container p-6 rounded-xl border border-outline-variant/30;
+}
+
+.cardFlex {
+    @apply bg-surface-container p-6 rounded-xl border border-outline-variant/30 flex-1;
+}
+
+.cardHeader {
+    @apply font-label uppercase text-[10px] tracking-widest text-secondary font-bold mb-4 flex items-center justify-between;
+    
+    .icon {
+        @apply text-sm;
+    }
+}
+
+.metaList {
+    @apply space-y-4;
+
+    .metaGroup {
+        .metaLabel {
+            @apply text-[10px] font-label text-on-surface-variant uppercase tracking-tighter;
+        }
+
+        .metaValue {
+            @apply text-sm font-medium;
+        }
+    }
+}
+
+.aiList {
+    @apply space-y-3;
+
+    .aiSuggestion {
+        @apply p-3 bg-surface-container-lowest border border-outline-variant/50 rounded cursor-pointer hover:border-secondary transition-colors;
+
+        .title {
+            @apply text-xs font-bold mb-1;
+        }
+
+        .desc {
+            @apply text-[10px] text-on-surface-variant leading-relaxed;
+        }
+    }
+}

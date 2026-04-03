@@ -1,0 +1,74 @@
+@reference "../../../app/globals.css";
+
+.container {
+    @apply flex-1 flex flex-col bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/30 shadow-sm relative;
+}
+
+.header {
+    @apply p-4 border-b border-outline-variant/50 bg-surface-container flex justify-between items-center;
+
+    .status {
+        @apply font-label uppercase text-xs tracking-widest text-on-surface-variant flex items-center gap-2;
+        
+        .indicator {
+            @apply w-2 h-2 rounded-full bg-red-500 animate-pulse;
+        }
+    }
+
+    .timer {
+        @apply font-label text-xs text-on-surface-variant;
+    }
+}
+
+.transcript {
+    @apply flex-1 p-8 overflow-y-auto font-headline text-2xl leading-relaxed text-on-surface-variant scroll-smooth;
+
+    .boldHighlight {
+        @apply text-secondary font-bold;
+    }
+
+    .italic {
+        @apply italic;
+    }
+
+    .underline {
+        @apply underline;
+    }
+
+    .activeLine {
+        @apply mt-6 border-l-2 border-secondary pl-6 text-on-surface animate-pulse;
+
+        .cursor {
+            @apply inline-block w-2 h-8 bg-secondary ml-1 align-middle;
+        }
+    }
+}
+
+.controlsArea {
+    @apply p-6 bg-surface-container border-t border-outline-variant/50 flex flex-col items-center justify-center;
+}
+
+.waveform {
+    @apply flex items-end justify-center gap-[4px] h-12 mb-6;
+
+    .bar {
+        @apply w-1 rounded-sm bg-secondary;
+        transition: height 0.1s ease;
+        /* Dynamic height is applied via inline styles in React or classes */
+        animation: eq 1s infinite alternate ease-in-out;
+    }
+
+    /* Stagger the animation so they dont move in sync */
+    .bar:nth-child(even) { animation-duration: 0.8s; }
+    .bar:nth-child(3n) { animation-duration: 1.2s; }
+    .bar:nth-child(5n) { animation-duration: 0.6s; }
+}
+
+@keyframes eq {
+    0% { transform: scaleY(0.4); }
+    100% { transform: scaleY(1); }
+}
+
+.pauseBtn {
+    @apply w-16 h-16 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-lg hover:scale-105 transition-transform active:scale-95 cursor-pointer;
+}
