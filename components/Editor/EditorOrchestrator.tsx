@@ -9,6 +9,7 @@ import VoiceInput from './VoiceInput/VoiceInput';
 import WYSIWYGEditor, { WYSIWYGEditorRef } from './WYSIWYGEditor/WYSIWYGEditor';
 import MetadataSidebar from './MetadataSidebar/MetadataSidebar';
 import FloatingContextBar from './FloatingContextBar/FloatingContextBar';
+import LLMTextInput from './LLMTextInput/LLMTextInput';
 import AnimatedIcon from '@nakprc/components/UI/AnimatedIcon';
 import Link from 'next/link';
 import { useAutoFormat } from '@nakprc/hooks/useAutoFormat';
@@ -36,31 +37,23 @@ export default function EditorOrchestrator() {
         if (!isFinal || !editorRef.current) return;
 
         if (!autoFormat) {
-            // Direct insert without LLM formatting
             editorRef.current.insertText(text);
             return;
         }
 
-        // Accumulate text for batch formatting
         pendingTextRef.current += text;
 
-        // Debounce: only format when we have a reasonable chunk of text
-        // (at least 20 chars, or wait for next final result)
         if (pendingTextRef.current.trim().length < 20) return;
 
         const textToFormat = pendingTextRef.current;
         pendingTextRef.current = '';
 
-        // Get existing content for context
         const existingContent = editorRef.current.getHTML();
-
-        // Send to LLM for formatting
         const formattedHTML = await formatText(textToFormat, existingContent);
 
         if (formattedHTML && editorRef.current) {
             editorRef.current.insertHTML(formattedHTML);
         } else if (!formattedHTML && editorRef.current) {
-            // Fallback: insert raw text if LLM failed
             editorRef.current.insertText(textToFormat);
         }
     }, [autoFormat, formatText]);
@@ -85,9 +78,30 @@ export default function EditorOrchestrator() {
         }
     }, [autoFormat, formatText]);
 
+    // Handle manual LLM text input submission
+    const handleLLMTextSubmit = useCallback(async (text: string) => {
+        if (!editorRef.current) return;
+
+        if (!autoFormat) {
+            editorRef.current.insertText(text);
+            return;
+        }
+
+        const existingContent = editorRef.current.getHTML();
+        const formattedHTML = await formatText(text, existingContent);
+
+        if (formattedHTML && editorRef.current) {
+            editorRef.current.insertHTML(formattedHTML);
+        } else if (editorRef.current) {
+            editorRef.current.insertText(text);
+        }
+    }, [autoFormat, formatText]);
+
     const toggleVoicePanel = useCallback(() => {
         setVoiceCollapsed(prev => !prev);
     }, []);
+
+    const currentProviderLabel = providers.find(p => p.name === provider)?.label || provider;
 
     return (
         <div className={styles.layout}>
@@ -113,34 +127,44 @@ export default function EditorOrchestrator() {
                         onToggleCollapse={toggleVoicePanel}
                     />
 
-                    {/* WYSIWYG Editor with AI formatting indicator */}
-                    <div className={styles.editorContainer}>
-                        <AnimatePresence>
-                            {isFormatting && (
-                                <motion.div
-                                    className={styles.formattingBanner}
-                                    initial={{ opacity: 0, y: -10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }}
-                                >
-                                    <div className={styles.formattingDot} />
-                                    <span>AI formatting via {providers.find(p => p.name === provider)?.label || provider}...</span>
-                                </motion.div>
-                            )}
-                            {formatError && (
-                                <motion.div
-                                    className={styles.errorBanner}
-                                    initial={{ opacity: 0, y: -10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }}
-                                >
-                                    <AnimatedIcon icon="error" className={styles.errorIcon} />
-                                    <span>{formatError}</span>
-                                    <button onClick={clearError} className={styles.dismissBtn}>✕</button>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                        <WYSIWYGEditor ref={editorRef} />
+                    {/* Center column: Editor + LLM Text Input */}
+                    <div className={styles.centerColumn}>
+                        {/* WYSIWYG Editor with AI formatting indicator */}
+                        <div className={styles.editorContainer}>
+                            <AnimatePresence>
+                                {isFormatting && (
+                                    <motion.div
+                                        className={styles.formattingBanner}
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -10 }}
+                                    >
+                                        <div className={styles.formattingDot} />
+                                        <span>AI formatting via {currentProviderLabel}...</span>
+                                    </motion.div>
+                                )}
+                                {formatError && (
+                                    <motion.div
+                                        className={styles.errorBanner}
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -10 }}
+                                    >
+                                        <AnimatedIcon icon="error" className={styles.errorIcon} />
+                                        <span>{formatError}</span>
+                                        <button onClick={clearError} className={styles.dismissBtn}>✕</button>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                            <WYSIWYGEditor ref={editorRef} />
+                        </div>
+
+                        {/* LLM Text Input — type/paste text for auto-formatting */}
+                        <LLMTextInput
+                            onSubmit={handleLLMTextSubmit}
+                            isFormatting={isFormatting}
+                            providerLabel={currentProviderLabel}
+                        />
                     </div>
 
                     <MetadataSidebar />

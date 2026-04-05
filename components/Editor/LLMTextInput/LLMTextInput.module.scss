@@ -1,0 +1,103 @@
+@reference "../../../app/globals.css";
+
+/* ── Trigger button (collapsed state) ── */
+.triggerBtn {
+    @apply w-full flex items-center gap-2 px-5 py-3 bg-surface-container-low rounded-xl border border-outline-variant/30 text-on-surface-variant text-xs font-label uppercase tracking-widest cursor-pointer transition-all hover:border-secondary/40 hover:bg-surface-container;
+    .triggerIcon {
+        @apply text-sm text-secondary;
+    }
+    span {
+        @apply text-on-surface-variant/60;
+    }
+}
+
+/* ── Expanded container ── */
+.container {
+    @apply w-full bg-surface-container-low rounded-xl border border-outline-variant/30 overflow-hidden shadow-sm;
+}
+
+/* ── Header ── */
+.header {
+    @apply flex items-center justify-between px-4 py-2.5 bg-surface-container border-b border-outline-variant/50;
+}
+.headerLeft {
+    @apply flex items-center gap-2;
+}
+.headerIcon {
+    @apply text-sm text-secondary;
+}
+.headerTitle {
+    @apply font-label text-[10px] uppercase tracking-widest text-on-surface font-bold;
+}
+.headerHint {
+    @apply hidden sm:inline font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider;
+}
+.closeBtn {
+    @apply w-6 h-6 flex items-center justify-center text-on-surface-variant/60 hover:text-on-surface text-xs rounded-full hover:bg-surface-container-high transition-colors cursor-pointer;
+}
+
+/* ── Textarea ── */
+.inputWrap {
+    @apply p-4;
+}
+.textarea {
+    @apply w-full bg-transparent text-on-surface text-sm leading-relaxed resize-none outline-none;
+    font-family: var(--font-body);
+    min-height: 60px;
+    max-height: 200px;
+    &::placeholder {
+        @apply text-on-surface-variant/40 text-xs;
+    }
+    &:disabled {
+        @apply opacity-50;
+    }
+}
+
+/* ── Footer ── */
+.footer {
+    @apply flex items-center justify-between px-4 py-2.5 bg-surface-container border-t border-outline-variant/50;
+}
+.footerLeft {
+    @apply flex items-center gap-3;
+}
+.footerRight {
+    @apply flex items-center gap-3;
+}
+
+.charCount {
+    @apply font-label text-[9px] text-on-surface-variant uppercase tracking-wider;
+}
+
+.shortcut {
+    @apply hidden sm:flex items-center gap-0.5 font-label text-[9px] text-on-surface-variant/50;
+}
+.kbd {
+    @apply inline-block px-1 py-0.5 bg-surface-container-high rounded text-[8px] font-mono border border-outline-variant/30;
+}
+
+.formattingLabel {
+    @apply flex items-center gap-1.5 font-label text-[9px] text-secondary uppercase tracking-widest;
+}
+.spinnerDot {
+    @apply w-2.5 h-2.5 border-[1.5px] border-secondary/30 border-t-secondary rounded-full inline-block;
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.submitBtn {
+    @apply flex items-center gap-1.5 px-4 py-1.5 bg-secondary text-on-secondary text-[10px] font-label uppercase tracking-widest font-bold rounded-lg shadow-sm cursor-pointer transition-all;
+    &:hover:not(.disabled) {
+        @apply bg-secondary/90 scale-[1.02];
+    }
+    &:active:not(.disabled) {
+        @apply scale-[0.98];
+    }
+    &.disabled {
+        @apply opacity-40 cursor-not-allowed;
+    }
+    .submitIcon {
+        @apply text-xs;
+    }
+}
