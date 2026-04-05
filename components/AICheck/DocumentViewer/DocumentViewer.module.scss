@@ -4,33 +4,42 @@
     @apply flex-1 overflow-y-auto bg-surface;
     scrollbar-width: thin;
     scrollbar-color: #c4c6cc #f0ede9;
-    &::-webkit-scrollbar { width: 4px; }
-    &::-webkit-scrollbar-track { background: #f0ede9; }
-    &::-webkit-scrollbar-thumb { background: #c4c6cc; }
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f0ede9;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #c4c6cc;
+    }
 }
 
 .inner {
-    @apply max-w-4xl mx-auto py-16 px-12;
+    @apply max-w-4xl mx-auto py-6 sm:py-12 px-4 sm:px-12;
 }
 
 .paper {
-    @apply bg-surface-container-lowest shadow-sm p-16 min-h-[1056px] border border-surface-container;
+    @apply bg-surface-container-lowest shadow-sm p-4 sm:p-8 md:p-12 min-h-[1056px] border border-surface-container;
 }
 
 .docHeader {
-    @apply mb-12 border-b border-outline-variant pb-8;
+    @apply mb-6 sm:mb-8 md:mb-12 border-b border-outline-variant pb-4 sm:pb-6 md:pb-8;
 
     .sectionLabel {
         @apply font-label text-xs text-secondary mb-2 block tracking-widest;
     }
 
     .docTitle {
-        @apply font-headline text-4xl font-bold text-on-surface leading-tight;
+        @apply font-headline text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-on-surface leading-tight;
     }
 }
 
 .body {
-    @apply space-y-8 text-on-surface leading-relaxed text-lg font-body;
+    @apply space-y-4 sm:space-y-6 md:space-y-8 text-on-surface leading-relaxed text-base sm:text-lg md:text-lg font-body;
 }
 
 /* Inline highlights */
@@ -57,7 +66,7 @@
 
 /* AI observation callout */
 .aiNote {
-    @apply p-6 bg-surface-container-low border-l-4 border-secondary my-8;
+    @apply p-4 sm:p-6 bg-surface-container-low border-l-4 border-secondary my-6 sm:my-8;
 
     .noteLabel {
         @apply font-label text-[10px] uppercase tracking-widest text-secondary block mb-2;

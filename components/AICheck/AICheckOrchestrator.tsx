@@ -5,6 +5,8 @@ import AICheckHeader from './AICheckHeader/AICheckHeader';
 import DocumentViewer from './DocumentViewer/DocumentViewer';
 import QualitySidebar from './QualitySidebar/QualitySidebar';
 import AIReviewToolbar from './AIReviewToolbar/AIReviewToolbar';
+import AnimatedIcon from '@nakprc/components/UI/AnimatedIcon';
+import Link from 'next/link';
 
 export default function AICheckOrchestrator() {
     return (
@@ -22,6 +24,26 @@ export default function AICheckOrchestrator() {
             </div>
 
             <AIReviewToolbar />
+
+            {/* Mobile Navigation bar */}
+            <nav className={styles.mobileNav}>
+                <Link href="/dashboard" className={styles.navItem}>
+                    <AnimatedIcon icon="home" className={styles.icon} />
+                    <span className={styles.label}>Home</span>
+                </Link>
+                <Link href="#" className={styles.navItemActive}>
+                    <AnimatedIcon icon="verified" className={styles.icon} />
+                    <span className={styles.label}>AI Check</span>
+                </Link>
+                <Link href="/editor" className={styles.navItem}>
+                    <AnimatedIcon icon="description" className={styles.icon} />
+                    <span className={styles.label}>Drafts</span>
+                </Link>
+                <Link href="#" className={styles.navItem}>
+                    <AnimatedIcon icon="person" className={styles.icon} />
+                    <span className={styles.label}>Profile</span>
+                </Link>
+            </nav>
         </div>
     );
 }

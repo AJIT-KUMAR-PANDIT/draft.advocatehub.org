@@ -5,15 +5,19 @@
 }
 
 .leftSection {
-    @apply flex items-center gap-8;
+    @apply flex items-center gap-4;
+
+    .mobileMenuBtn {
+        @apply md:hidden p-2 -ml-2 text-on-surface hover:bg-surface-container-low rounded-sm;
+    }
 
     .logo {
-        @apply text-2xl font-black text-on-surface font-headline tracking-tight;
+        @apply hidden md:block text-2xl font-black text-on-surface font-headline tracking-tight;
     }
 
     .searchBox {
         @apply relative hidden lg:block;
-        
+
         .icon {
             @apply absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant;
         }
@@ -25,7 +29,7 @@
 }
 
 .rightSection {
-    @apply flex items-center gap-6;
+    @apply flex items-center gap-4;
 
     .nav {
         @apply hidden md:flex gap-6 items-center;
@@ -36,10 +40,10 @@
     }
 
     .actions {
-        @apply flex items-center gap-4 border-l border-outline-variant/30 pl-6;
+        @apply flex items-center gap-3 lg:gap-4;
 
         .iconBtn {
-            @apply text-on-surface relative;
+            @apply text-on-surface relative hidden sm:block;
 
             .badge {
                 @apply absolute top-0 right-0 w-2 h-2 bg-error rounded-full border-2 border-surface;
@@ -52,7 +56,7 @@
 
         .avatar {
             @apply w-8 h-8 bg-surface-container-highest rounded-full overflow-hidden border border-outline-variant/20 block;
-            
+
             img {
                 @apply w-full h-full object-cover;
             }

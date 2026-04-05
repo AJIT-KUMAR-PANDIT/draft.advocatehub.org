@@ -5,9 +5,30 @@
 }
 
 .shell {
-    @apply flex pt-16 h-screen overflow-hidden w-full;
+    @apply flex pt-16 h-screen overflow-hidden w-full md:flex-col md:h-auto;
 }
 
 .main {
-    @apply ml-64 mr-80 flex-1 overflow-hidden flex flex-col;
+    @apply ml-64 mr-80 flex-1 overflow-hidden flex flex-col md:ml-0 md:mr-0 md:h-[calc(100vh-4rem)];
+}
+
+/* Mobile Navigation */
+.mobileNav {
+    @apply fixed bottom-0 left-0 right-0 bg-surface border-t border-outline-variant/20 px-2 py-1 md:hidden flex justify-around items-center z-50;
+}
+
+.navItem {
+    @apply flex flex-col items-center justify-center gap-1 p-3 rounded-lg text-outline-variant hover:text-on-surface transition-colors;
+}
+
+.navItemActive {
+    @apply flex flex-col items-center justify-center gap-1 p-3 rounded-lg text-primary bg-surface-container-lowest transition-colors;
+}
+
+.icon {
+    @apply w-6 h-6;
+}
+
+.label {
+    @apply text-[9px] font-label uppercase tracking-wider;
 }

@@ -1,12 +1,21 @@
 @reference "../../../app/globals.css";
 
 .sidebar {
-    @apply fixed right-0 top-16 bottom-0 w-80 bg-surface-container border-l border-surface-container-highest p-6 overflow-y-auto;
+    @apply md:fixed right-0 top-16 bottom-0 w-80 bg-surface-container border-l border-surface-container-highest p-6 overflow-y-auto md:overflow-y-auto;
     scrollbar-width: thin;
     scrollbar-color: #c4c6cc #f0ede9;
-    &::-webkit-scrollbar { width: 4px; }
-    &::-webkit-scrollbar-track { background: #f0ede9; }
-    &::-webkit-scrollbar-thumb { background: #c4c6cc; }
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f0ede9;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #c4c6cc;
+    }
 }
 
 .stack {
@@ -60,16 +69,33 @@
         .sourceRow {
             @apply flex justify-between mb-1;
 
-            .sourceName { @apply text-xs font-bold; }
-            .pctHigh { @apply text-xs text-error font-bold; }
-            .pctMed { @apply text-xs text-secondary font-bold; }
+            .sourceName {
+                @apply text-xs font-bold;
+            }
+
+            .pctHigh {
+                @apply text-xs text-error font-bold;
+            }
+
+            .pctMed {
+                @apply text-xs text-secondary font-bold;
+            }
         }
 
         .bar {
             @apply w-full h-1 bg-surface-container-highest rounded-full overflow-hidden;
-            .fill { @apply h-full; }
-            .fillError { @apply bg-error; }
-            .fillSecondary { @apply bg-secondary; }
+
+            .fill {
+                @apply h-full;
+            }
+
+            .fillError {
+                @apply bg-error;
+            }
+
+            .fillSecondary {
+                @apply bg-secondary;
+            }
         }
     }
 }
@@ -85,9 +111,17 @@
     .item {
         @apply flex items-start gap-3;
 
-        .icon { @apply text-lg flex-shrink-0; }
-        .itemTitle { @apply text-xs font-bold; }
-        .itemDesc { @apply text-[10px] text-on-surface-variant; }
+        .icon {
+            @apply text-lg flex-shrink-0;
+        }
+
+        .itemTitle {
+            @apply text-xs font-bold;
+        }
+
+        .itemDesc {
+            @apply text-[10px] text-on-surface-variant;
+        }
     }
 
     .itemDisabled {

@@ -1,4 +1,5 @@
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
 import styles from './Dashboard.module.scss';
 import AnimatedIcon from '@nakprc/components/UI/AnimatedIcon';
 import Sidebar from '../Shared/Sidebar/Sidebar';
@@ -7,14 +8,27 @@ import KPIGrid from './KPIGrid/KPIGrid';
 import ActiveDockets from './ActiveDockets/ActiveDockets';
 
 export default function Dashboard() {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
     return (
         <div className="flex min-h-screen">
-            <Sidebar />
+            {/* Mobile Menu Overlay */}
+            {isMobileMenuOpen && (
+                <div
+                    className="fixed inset-0 bg-black/50 z-40 md:hidden"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                ></div>
+            )}
 
-            <main className="flex-1 md:ml-64 relative">
-                <TopNavBar />
+            {/* Mobile Sidebar */}
+            <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-surface-container transform transition-transform duration-300 md:hidden ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+                <Sidebar activeTab="dashboard" />
+            </aside>
 
-                <div className="max-w-[1200px] mx-auto px-8 py-12 pb-32">
+            <main className="flex-1 relative">
+                <TopNavBar isMobileMenuOpen={isMobileMenuOpen} onMenuToggle={() => setIsMobileMenuOpen(true)} />
+
+                <div className="max-w-[1200px] mx-auto px-4 py-6 sm:px-6 lg:px-8 sm:py-8 lg:py-12 pb-32">
                     <KPIGrid />
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">

@@ -3,10 +3,10 @@
 
 /* 1️⃣  AI‑Insights Panel – a few overrides that Tailwind can’t express in one line */
 .aiInsightsPanel {
-    @apply bg-primary text-on-primary p-8 rounded-lg relative overflow-hidden;
+    @apply bg-primary text-on-primary p-4 sm:p-6 lg:p-8 rounded-lg relative overflow-hidden;
 
     .header {
-        @apply flex items-center gap-2 mb-8;
+        @apply flex items-center gap-2 mb-6 sm:mb-8;
 
         .icon {
             @apply text-secondary-fixed;
@@ -22,7 +22,7 @@
 
     /* Progress circle – the only part that needs custom SVG styling */
     .progress {
-        @apply relative w-24 h-24 flex items-center justify-center;
+        @apply relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center;
 
         svg {
             @apply w-full h-full transform -rotate-90;
@@ -43,16 +43,16 @@
         }
 
         .text {
-            @apply absolute text-2xl font-headline font-bold italic;
+            @apply absolute text-xl sm:text-2xl font-headline font-bold italic;
         }
     }
 
     .description {
-        @apply mt-4 text-sm font-body text-primary-fixed leading-relaxed;
+        @apply mt-2 sm:mt-4 text-sm font-body text-primary-fixed leading-relaxed;
     }
 
     .trending {
-        @apply bg-primary-container/50 p-4 border-l-2 border-secondary-fixed;
+        @apply bg-primary-container/50 p-3 sm:p-4 border-l-2 border-secondary-fixed;
 
         .title {
             @apply font-label text-[10px] uppercase text-primary-fixed tracking-widest block mb-1;
@@ -66,17 +66,17 @@
 
 /* 2️⃣  Calendar / Quick‑Links card – a few convenience classes */
 .calendarCard {
-    @apply bg-surface-container-low p-8 border border-outline-variant/10;
+    @apply bg-surface-container-low p-4 sm:p-6 lg:p-8 border border-outline-variant/10;
 
     .header {
-        @apply font-headline text-lg font-bold mb-6;
+        @apply font-headline text-lg font-bold mb-4 sm:mb-6;
     }
 
     .deadline {
-        @apply flex gap-4;
+        @apply flex gap-3 sm:gap-4;
 
         .icon {
-            @apply flex flex-col items-center justify-center bg-surface-container-highest w-12 h-12 rounded-sm shrink-0;
+            @apply flex flex-col items-center justify-center bg-surface-container-highest w-10 h-10 sm:w-12 sm:h-12 rounded-sm shrink-0;
         }
 
         .label {
@@ -84,11 +84,11 @@
         }
 
         .date {
-            @apply font-headline font-bold text-lg;
+            @apply font-headline font-bold text-base sm:text-lg;
         }
 
         .title {
-            @apply text-sm font-bold text-on-surface;
+            @apply text-sm sm:text-base font-bold text-on-surface;
         }
 
         .subtext {
@@ -97,7 +97,7 @@
     }
 
     .openButton {
-        @apply w-full mt-8 border border-outline text-on-surface py-3 font-label uppercase tracking-widest text-[10px] transition-colors;
+        @apply w-full mt-6 sm:mt-8 border border-outline text-on-surface py-2 sm:py-3 font-label uppercase tracking-widest text-[10px] transition-colors;
 
         &:hover {
             @apply bg-surface-container-high;
@@ -107,7 +107,7 @@
 
 /* 3️⃣  Floating toolbar (desktop only) */
 .floatingToolbar {
-    @apply fixed bottom-8 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:right-8 bg-surface/85 backdrop-blur-md border border-outline-variant/20 px-6 py-3 shadow-xl rounded-full flex items-center gap-6 z-50;
+    @apply fixed bottom-4 left-4 right-4 sm:bottom-8 sm:left-auto sm:right-8 md:left-auto md:right-8 bg-surface/85 backdrop-blur-md border border-outline-variant/20 px-4 py-2 sm:px-6 sm:py-3 shadow-xl rounded-full flex items-center gap-4 sm:gap-6 z-50;
 }
 
 /* 4️⃣  Bottom nav – hidden on desktop */
