@@ -1,18 +1,30 @@
 'use client';
 
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './VoiceInput.module.scss';
 import AnimatedIcon from '@nakprc/components/UI/AnimatedIcon';
+
+export interface VoiceInputRef {
+    toggleListening: () => void;
+    startListening: () => void;
+    stopListening: () => void;
+    isListening: () => boolean;
+}
 
 interface VoiceInputProps {
     onTranscript: (text: string, isFinal: boolean) => void;
     onRecordingStop?: () => void;
     isCollapsed?: boolean;
     onToggleCollapse?: () => void;
+    hidden?: boolean;
+    onListeningChange?: (isListening: boolean) => void;
 }
 
-export default function VoiceInput({ onTranscript, onRecordingStop, isCollapsed = false, onToggleCollapse }: VoiceInputProps) {
+const VoiceInput = forwardRef<VoiceInputRef, VoiceInputProps>(function VoiceInput(
+    { onTranscript, onRecordingStop, isCollapsed = false, onToggleCollapse, hidden = false, onListeningChange }: VoiceInputProps,
+    ref
+) {
     const [isListening, setIsListening] = useState(false);
     const [interimText, setInterimText] = useState('');
     const [finalText, setFinalText] = useState('');
@@ -165,6 +177,23 @@ export default function VoiceInput({ onTranscript, onRecordingStop, isCollapsed 
         onRecordingStop?.();
     }, [stopAudioVisualizer, onRecordingStop]);
 
+    useImperativeHandle(ref, () => ({
+        toggleListening: () => {
+            if (isListening) {
+                stopListening();
+                return;
+            }
+            startListening();
+        },
+        startListening,
+        stopListening,
+        isListening: () => isListening,
+    }), [isListening, startListening, stopListening]);
+
+    useEffect(() => {
+        onListeningChange?.(isListening);
+    }, [isListening, onListeningChange]);
+
     // Cleanup on unmount
     useEffect(() => {
         return () => {
@@ -185,6 +214,10 @@ export default function VoiceInput({ onTranscript, onRecordingStop, isCollapsed 
         { code: 'gu-IN', label: 'ગુજરાતી' },
         { code: 'kn-IN', label: 'ಕನ್ನಡ' },
     ];
+
+    if (hidden) {
+        return null;
+    }
 
     if (isCollapsed) {
         return (
@@ -390,4 +423,6 @@ export default function VoiceInput({ onTranscript, onRecordingStop, isCollapsed 
             </div>
         </motion.div>
     );
-}
+});
+
+export default VoiceInput;

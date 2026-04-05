@@ -41,6 +41,7 @@ import {
   Circle,
   ChevronDown,
   ArrowLeft,
+  ArrowUp,
   Lightbulb,
   HelpCircle as Help,
   type LucideIcon
@@ -87,6 +88,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   radio_button_unchecked: Circle,
   expand_more: ChevronDown,
   arrow_back: ArrowLeft,
+  arrow_upward: ArrowUp,
   lightbulb: Lightbulb,
   help: Help,
 };

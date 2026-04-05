@@ -1,103 +1,116 @@
 @reference "../../../app/globals.css";
 
-/* ── Trigger button (collapsed state) ── */
-.triggerBtn {
-    @apply w-full flex items-center gap-2 px-5 py-3 bg-surface-container-low rounded-xl border border-outline-variant/30 text-on-surface-variant text-xs font-label uppercase tracking-widest cursor-pointer transition-all hover:border-secondary/40 hover:bg-surface-container;
-    .triggerIcon {
-        @apply text-sm text-secondary;
-    }
-    span {
-        @apply text-on-surface-variant/60;
-    }
-}
-
-/* ── Expanded container ── */
 .container {
-    @apply w-full bg-surface-container-low rounded-xl border border-outline-variant/30 overflow-hidden shadow-sm;
+    @apply fixed left-1/2 z-40 flex w-full max-w-3xl flex-col items-center px-4;
+    bottom: 15.25rem;
+    transform: translateX(-50%);
 }
 
-/* ── Header ── */
-.header {
-    @apply flex items-center justify-between px-4 py-2.5 bg-surface-container border-b border-outline-variant/50;
-}
-.headerLeft {
-    @apply flex items-center gap-2;
-}
-.headerIcon {
-    @apply text-sm text-secondary;
-}
-.headerTitle {
-    @apply font-label text-[10px] uppercase tracking-widest text-on-surface font-bold;
-}
-.headerHint {
-    @apply hidden sm:inline font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider;
-}
-.closeBtn {
-    @apply w-6 h-6 flex items-center justify-center text-on-surface-variant/60 hover:text-on-surface text-xs rounded-full hover:bg-surface-container-high transition-colors cursor-pointer;
+.shell {
+    @apply relative flex w-full items-center gap-2 rounded-full border border-outline-variant/60 bg-surface/88 px-2 py-2 shadow-lg;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 22px 60px rgba(28, 28, 25, 0.16);
 }
 
-/* ── Textarea ── */
+.iconGroup {
+    @apply flex items-center gap-1.5 pl-2 pr-1;
+}
+
+.aiIconWrap {
+    @apply flex items-center justify-center text-on-surface-variant/70;
+}
+
+.aiIcon,
+.voiceIcon,
+.submitIcon {
+    @apply text-[1.1rem];
+}
+
+.voiceBtn {
+    @apply flex h-9 w-9 items-center justify-center rounded-full text-on-surface-variant/70 transition-all duration-200 cursor-pointer;
+
+    &:hover {
+        @apply bg-surface-container text-secondary;
+    }
+}
+
+.voiceBtnActive {
+    @apply bg-secondary text-on-secondary;
+    box-shadow: 0 8px 24px rgba(117, 91, 0, 0.28);
+}
+
 .inputWrap {
-    @apply p-4;
+    @apply min-w-0 flex-1;
 }
-.textarea {
-    @apply w-full bg-transparent text-on-surface text-sm leading-relaxed resize-none outline-none;
+
+.input {
+    @apply w-full bg-transparent border-none text-sm text-on-surface outline-none;
     font-family: var(--font-body);
-    min-height: 60px;
-    max-height: 200px;
+
     &::placeholder {
-        @apply text-on-surface-variant/40 text-xs;
+        @apply text-on-surface-variant/55;
     }
+
     &:disabled {
-        @apply opacity-50;
+        @apply opacity-50 cursor-not-allowed;
     }
 }
 
-/* ── Footer ── */
-.footer {
-    @apply flex items-center justify-between px-4 py-2.5 bg-surface-container border-t border-outline-variant/50;
-}
-.footerLeft {
-    @apply flex items-center gap-3;
-}
-.footerRight {
-    @apply flex items-center gap-3;
+.submitWrap {
+    @apply pr-1;
 }
 
-.charCount {
-    @apply font-label text-[9px] text-on-surface-variant uppercase tracking-wider;
+.submitBtn {
+    @apply flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-on-secondary shadow-md transition-all duration-200 cursor-pointer;
+
+    &:hover:not(.disabled) {
+        filter: brightness(1.05);
+        transform: translateY(-1px);
+    }
+
+    &:active:not(.disabled) {
+        transform: translateY(0);
+    }
+
+    &.disabled {
+        @apply opacity-40 cursor-not-allowed;
+        transform: none;
+    }
 }
 
-.shortcut {
-    @apply hidden sm:flex items-center gap-0.5 font-label text-[9px] text-on-surface-variant/50;
-}
-.kbd {
-    @apply inline-block px-1 py-0.5 bg-surface-container-high rounded text-[8px] font-mono border border-outline-variant/30;
+.statusBar {
+    @apply mt-2 flex w-full items-center justify-between gap-3 px-5;
 }
 
 .formattingLabel {
-    @apply flex items-center gap-1.5 font-label text-[9px] text-secondary uppercase tracking-widest;
+    @apply inline-flex items-center gap-1.5 font-label text-[10px] uppercase tracking-[0.2em] text-secondary;
 }
+
 .spinnerDot {
     @apply w-2.5 h-2.5 border-[1.5px] border-secondary/30 border-t-secondary rounded-full inline-block;
     animation: spin 0.8s linear infinite;
 }
+
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-.submitBtn {
-    @apply flex items-center gap-1.5 px-4 py-1.5 bg-secondary text-on-secondary text-[10px] font-label uppercase tracking-widest font-bold rounded-lg shadow-sm cursor-pointer transition-all;
-    &:hover:not(.disabled) {
-        @apply bg-secondary/90 scale-[1.02];
+.voiceStatus {
+    @apply font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/75;
+}
+
+@media (max-width: 900px) {
+    .container {
+        bottom: 15.5rem;
     }
-    &:active:not(.disabled) {
-        @apply scale-[0.98];
+
+    .shell {
+        @apply px-2;
     }
-    &.disabled {
-        @apply opacity-40 cursor-not-allowed;
-    }
-    .submitIcon {
-        @apply text-xs;
+
+    .statusBar {
+        @apply px-3;
     }
 }

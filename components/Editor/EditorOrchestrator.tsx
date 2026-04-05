@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import styles from './EditorOrchestrator.module.scss';
 import Sidebar from '@nakprc/components/Shared/Sidebar/Sidebar';
 import EditorHeader from './EditorHeader/EditorHeader';
-import VoiceInput from './VoiceInput/VoiceInput';
+import VoiceInput, { VoiceInputRef } from './VoiceInput/VoiceInput';
 import WYSIWYGEditor, { WYSIWYGEditorRef } from './WYSIWYGEditor/WYSIWYGEditor';
 import MetadataSidebar from './MetadataSidebar/MetadataSidebar';
 import FloatingContextBar from './FloatingContextBar/FloatingContextBar';
@@ -18,8 +18,10 @@ import EnhancedFlipbook from './Flipbook/EnhancedFlipbook';
 export default function EditorOrchestrator() {
     const [voiceCollapsed, setVoiceCollapsed] = useState(false);
     const editorRef = useRef<WYSIWYGEditorRef>(null);
+    const voiceInputRef = useRef<VoiceInputRef>(null);
     const pendingTextRef = useRef<string>('');
     const [showcaseContent, setShowcaseContent] = useState('');
+    const [isVoiceListening, setIsVoiceListening] = useState(false);
 
     const {
         formatText,
@@ -107,6 +109,10 @@ export default function EditorOrchestrator() {
         setVoiceCollapsed(prev => !prev);
     }, []);
 
+    const handleVoiceToggle = useCallback(() => {
+        voiceInputRef.current?.toggleListening();
+    }, []);
+
     const currentProviderLabel = providers.find(p => p.name === provider)?.label || provider;
 
     return (
@@ -127,13 +133,16 @@ export default function EditorOrchestrator() {
                 <section className={styles.workspace}>
                     {/* Voice Dictation Panel */}
                     <VoiceInput
+                        ref={voiceInputRef}
                         onTranscript={handleTranscript}
                         onRecordingStop={handleRecordingStop}
                         isCollapsed={voiceCollapsed}
                         onToggleCollapse={toggleVoicePanel}
+                        hidden={true}
+                        onListeningChange={setIsVoiceListening}
                     />
 
-                    {/* Center column: Editor + LLM Text Input */}
+                    {/* Center column: Editor + floating LLM/Voice input */}
                     <div className={styles.centerColumn}>
                         {/* WYSIWYG Editor with AI formatting indicator */}
                         <div className={styles.editorContainer}>
@@ -173,6 +182,8 @@ export default function EditorOrchestrator() {
                             onSubmit={handleLLMTextSubmit}
                             isFormatting={isFormatting}
                             providerLabel={currentProviderLabel}
+                            onVoiceToggle={handleVoiceToggle}
+                            isVoiceListening={isVoiceListening}
                         />
                     </div>
 
