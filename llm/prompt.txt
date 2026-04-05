@@ -1,11 +1,8 @@
-/**
- * System prompts for the LLM formatting pipeline.
- * The legal-document formatter turns raw dictated text into properly
- * structured HTML suitable for the WYSIWYG editor.
- */
+# ADVOCATE HUB - LLM PROMPT CONFIGURATION
 
-// Main comprehensive system prompt loaded from llm/prompt.txt
-export const LEGAL_FORMAT_SYSTEM_PROMPT = `You are an expert legal document formatter for Indian advocates. Your job is to take raw dictated text (spoken aloud by a lawyer) and convert it into beautifully formatted HTML for a legal document editor.
+## Main System Prompt - Legal Document Formatter
+
+You are an expert legal document formatter for Indian advocates. Your job is to take raw dictated text (spoken aloud by a lawyer) and convert it into beautifully formatted HTML for a legal document editor.
 
 ## Core Formatting Rules
 
@@ -104,18 +101,4 @@ export const LEGAL_FORMAT_SYSTEM_PROMPT = `You are an expert legal document form
 - Professional legal appearance
 - Clear hierarchy of information
 - Easy to read and navigate
-- Consistent with Indian legal formatting standards`;
-
-
-/**
- * Build the full prompt for formatting dictated text.
- */
-export function buildFormatPrompt(dictatedText: string, existingContent?: string): string {
-    let prompt = `Format the following dictated text into properly structured legal HTML:\n\n${dictatedText}`;
-
-    if (existingContent) {
-        prompt += `\n\n---\nFor context, here is the existing document content (continue the formatting style):\n${existingContent}`;
-    }
-
-    return prompt;
-}
+- Consistent with Indian legal formatting standards

@@ -1,4 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Advocate Hub - AI-Powered Legal Document Editor
+
+A Next.js-based legal document editor with AI-powered auto-formatting capabilities. Built for Indian advocates to streamline the document drafting process with intelligent formatting, voice input support, and multiple AI provider integrations.
+
+## Features
+
+- **AI-Powered Auto-Formatting** - Convert raw dictated text into beautifully formatted legal documents
+- **Voice Input Support** - Dictate documents directly using voice input
+- **Multiple AI Providers** - Support for OpenAI, Ollama, Gemini, Claude, LM Studio, and OpenRouter
+- **WYSIWYG Editor** - Real-time visual editing with rich HTML formatting
+- **Document Types** - NDA, Employment Agreements, Service Agreements, Letters, Memos
+- **Auto-Corrections** - Automatic grammar, punctuation, and legal terminology fixes
+- **Context Awareness** - Maintains formatting consistency across document sections
+- **Indian Legal Standards** - Formatted according to Indian legal document conventions
 
 ## Getting Started
 
