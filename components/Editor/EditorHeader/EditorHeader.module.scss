@@ -1,7 +1,7 @@
 @reference "../../../app/globals.css";
 
 .header {
-    @apply h-16 bg-surface border-b border-outline-variant flex justify-between items-center px-8 sticky top-0 z-30 w-full;
+    @apply h-16 bg-surface border-b border-outline-variant flex justify-between items-center px-8 sticky top-0 z-30 w-full gap-4;
 }
 
 .leftSection {
@@ -28,6 +28,57 @@
     }
 }
 
+/* ── AI Controls (center) ── */
+.aiControls {
+    @apply flex items-center gap-2;
+}
+
+.toggleBtn {
+    @apply flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-label uppercase tracking-widest font-bold rounded-full border transition-all cursor-pointer;
+    @apply border-outline-variant/50 text-on-surface-variant bg-transparent;
+    &:hover {
+        @apply bg-surface-container-high;
+    }
+    &.active {
+        @apply bg-secondary-container/30 border-secondary/30 text-secondary;
+    }
+    .toggleIcon {
+        @apply text-xs;
+    }
+    .toggleLabel {
+        @apply hidden sm:inline;
+    }
+}
+
+.miniDivider {
+    @apply w-px h-4 bg-outline-variant/40;
+}
+
+.providerSelect {
+    @apply bg-surface-container-lowest border border-outline-variant/50 rounded-lg px-2 py-1 text-[10px] font-label text-on-surface outline-none cursor-pointer uppercase tracking-wider;
+    max-width: 160px;
+    &:disabled {
+        @apply opacity-50 cursor-not-allowed;
+    }
+}
+
+.modelBadge {
+    @apply px-2 py-0.5 bg-surface-container text-[9px] font-label text-on-surface-variant rounded-full truncate;
+    max-width: 120px;
+}
+
+.formattingIndicator {
+    @apply flex items-center;
+}
+.spinDot {
+    @apply w-3 h-3 border-2 border-secondary/30 border-t-secondary rounded-full;
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Right section ── */
 .rightSection {
     @apply flex items-center gap-4;
 

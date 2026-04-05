@@ -1,0 +1,184 @@
+@reference "../../../app/globals.css";
+
+.editorWrapper {
+    @apply flex-1 flex flex-col bg-surface-container-lowest rounded-xl border border-outline-variant/30 overflow-hidden;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.03);
+    min-height: 0;
+}
+
+/* ── Toolbar ── */
+.toolbar {
+    @apply flex flex-wrap items-center gap-1 p-2 px-3 border-b border-outline-variant/50 bg-surface-container;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.fontSelect {
+    @apply bg-surface-container-lowest border border-outline-variant/50 rounded px-2 py-1 text-xs font-label text-on-surface outline-none cursor-pointer;
+    max-width: 120px;
+}
+
+.sizeSelect {
+    @apply bg-surface-container-lowest border border-outline-variant/50 rounded px-2 py-1 text-xs font-label text-on-surface outline-none cursor-pointer;
+    width: 48px;
+}
+
+.toolbarDivider {
+    @apply w-px h-5 bg-outline-variant/40 mx-1;
+}
+
+.btnGroup {
+    @apply flex items-center gap-[2px];
+}
+
+.toolBtn {
+    @apply flex items-center justify-center w-7 h-7 rounded text-xs font-bold text-on-surface-variant cursor-pointer transition-all;
+    &:hover {
+        @apply bg-surface-container-high text-on-surface;
+    }
+    &.active {
+        @apply bg-secondary-container/30 text-secondary;
+    }
+}
+
+.colorA {
+    @apply text-sm font-bold;
+    text-decoration: underline;
+    text-decoration-color: var(--color-secondary);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 2px;
+}
+
+.paintIcon {
+    @apply text-xs;
+}
+
+.clearFormatIcon {
+    @apply text-xs opacity-60;
+}
+
+/* ── Color Picker ── */
+.colorPickerWrap {
+    @apply relative;
+}
+
+.colorDropdown {
+    @apply absolute top-full mt-1 left-0 z-50 bg-surface border border-outline-variant/50 rounded-lg p-2 shadow-xl flex gap-1 flex-wrap;
+    min-width: 130px;
+}
+
+.colorSwatch {
+    @apply w-6 h-6 rounded-full cursor-pointer border-2 border-transparent transition-all;
+    &:hover {
+        @apply border-secondary scale-110;
+    }
+}
+
+/* ── Content area ── */
+.editArea {
+    @apply flex-1 p-8 overflow-y-auto outline-none text-on-surface;
+    font-family: 'Newsreader', serif;
+    font-size: 16px;
+    line-height: 1.85;
+    min-height: 400px;
+    text-align: justify;
+    text-justify: inter-word;
+
+    &:empty::before {
+        content: attr(data-placeholder);
+        color: var(--color-on-surface-variant);
+        opacity: 0.5;
+        font-style: italic;
+        pointer-events: none;
+    }
+
+    /* Rich text styles */
+    h1 {
+        @apply text-2xl font-bold mb-6 mt-8;
+        font-family: var(--font-headline);
+    }
+    h2 {
+        @apply text-xl font-bold mb-4 mt-6;
+        font-family: var(--font-headline);
+    }
+    h3 {
+        @apply text-lg font-bold mb-3 mt-4;
+        font-family: var(--font-headline);
+    }
+    p {
+        @apply mb-4;
+    }
+    blockquote {
+        @apply border-l-4 border-secondary pl-6 my-4 italic text-on-surface-variant;
+        background: rgba(0,0,0,0.02);
+        padding: 1rem 1rem 1rem 1.5rem;
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+    ul {
+        @apply list-disc pl-8 mb-4;
+    }
+    ol {
+        @apply list-decimal pl-8 mb-4;
+    }
+    li {
+        @apply mb-1;
+    }
+    a {
+        @apply text-primary underline;
+    }
+    strong {
+        @apply font-bold;
+    }
+    em {
+        @apply italic;
+    }
+    u {
+        @apply underline;
+    }
+    strike, s {
+        @apply line-through;
+    }
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+    &::-webkit-scrollbar-track {
+        @apply bg-transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        @apply bg-outline-variant/30 rounded-full;
+        &:hover {
+            @apply bg-outline-variant/50;
+        }
+    }
+}
+
+/* ── Status bar ── */
+.statusBar {
+    @apply flex items-center justify-between px-4 py-2 border-t border-outline-variant/30 bg-surface-container;
+}
+
+.statusLeft {
+    @apply flex items-center gap-2;
+}
+.statusRight {
+    @apply flex items-center gap-4;
+}
+
+.statItem {
+    @apply font-label text-[10px] text-on-surface-variant uppercase tracking-wider flex items-center gap-1;
+}
+.statDivider {
+    @apply text-on-surface-variant/30 text-[8px];
+}
+
+.savedLabel {
+    @apply flex items-center gap-1 font-label text-[10px] text-green-600 uppercase tracking-wider;
+    .savedIcon {
+        @apply text-xs;
+    }
+}
+
+.kbd {
+    @apply inline-block bg-surface-container-high px-1 rounded text-[9px] font-mono mx-[2px] border border-outline-variant/30;
+}

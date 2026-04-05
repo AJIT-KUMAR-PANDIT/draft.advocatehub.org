@@ -1,74 +1,205 @@
 @reference "../../../app/globals.css";
 
 .container {
-    @apply flex-1 flex flex-col bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/30 shadow-sm relative;
+    @apply flex flex-col bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/30 shadow-sm relative;
+    width: 340px;
+    min-width: 300px;
+    max-height: calc(100vh - 120px);
 }
 
+/* ── Collapsed mini-bar ── */
+.collapsed {
+    @apply flex items-center gap-3 bg-surface-container-low rounded-xl border border-outline-variant/30 px-4 py-3 shadow-sm;
+    width: auto;
+    min-width: auto;
+}
+
+.micBtnSmall {
+    @apply w-10 h-10 rounded-full bg-surface-container flex items-center justify-center cursor-pointer transition-all;
+    &.active {
+        @apply bg-red-500/10;
+        .micIcon {
+            @apply text-red-500;
+        }
+    }
+    .micIcon {
+        @apply text-lg text-on-surface-variant;
+    }
+}
+
+.miniWaveform {
+    @apply flex items-end gap-[2px] h-5;
+}
+.miniBar {
+    @apply w-[3px] rounded-sm bg-secondary;
+    min-height: 3px;
+}
+.miniTimer {
+    @apply font-label text-[10px] text-on-surface-variant tabular-nums;
+}
+.expandBtn {
+    @apply ml-auto w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container transition-colors cursor-pointer;
+    .expandIcon {
+        @apply text-sm text-on-surface-variant;
+        transform: rotate(-90deg);
+    }
+}
+
+/* ── Header ── */
 .header {
-    @apply p-4 border-b border-outline-variant/50 bg-surface-container flex justify-between items-center;
+    @apply p-4 border-b border-outline-variant/50 bg-surface-container flex justify-between items-center gap-3;
+}
+.headerLeft {
+    @apply flex items-center gap-3;
+}
+.headerRight {
+    @apply flex items-center gap-2;
+}
 
-    .status {
-        @apply font-label uppercase text-xs tracking-widest text-on-surface-variant flex items-center gap-2;
-        
-        .indicator {
-            @apply w-2 h-2 rounded-full bg-red-500 animate-pulse;
-        }
-    }
+.status {
+    @apply font-label uppercase text-[10px] tracking-widest text-on-surface-variant flex items-center gap-2 font-bold;
+}
 
-    .timer {
-        @apply font-label text-xs text-on-surface-variant;
+.indicator {
+    @apply w-2 h-2 rounded-full bg-outline-variant transition-colors;
+    &.active {
+        @apply bg-red-500;
+        animation: pulse-glow 1.5s ease-in-out infinite;
     }
 }
 
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+    50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+}
+
+.timer {
+    @apply font-label text-xs text-secondary tabular-nums font-bold;
+}
+
+.langSelect {
+    @apply bg-surface-container text-on-surface-variant text-[10px] font-label px-2 py-1 rounded border border-outline-variant/50 cursor-pointer outline-none uppercase tracking-wider;
+    &:disabled {
+        @apply opacity-50 cursor-not-allowed;
+    }
+}
+
+.collapseBtn {
+    @apply w-7 h-7 rounded-full flex items-center justify-center hover:bg-surface-container-high transition-colors cursor-pointer;
+    .collapseBtnIcon {
+        @apply text-sm text-on-surface-variant;
+    }
+}
+
+/* ── Transcript area ── */
 .transcript {
-    @apply flex-1 p-8 overflow-y-auto font-headline text-2xl leading-relaxed text-on-surface-variant scroll-smooth;
+    @apply flex-1 p-6 overflow-y-auto min-h-[180px] max-h-[300px];
+}
 
-    .boldHighlight {
-        @apply text-secondary font-bold;
-    }
-
-    .italic {
-        @apply italic;
-    }
-
-    .underline {
-        @apply underline;
-    }
-
-    .activeLine {
-        @apply mt-6 border-l-2 border-secondary pl-6 text-on-surface animate-pulse;
-
-        .cursor {
-            @apply inline-block w-2 h-8 bg-secondary ml-1 align-middle;
-        }
+.errorMsg {
+    @apply flex items-center gap-2 text-error text-xs font-label bg-error-container/30 px-3 py-2 rounded;
+    .errorIcon {
+        @apply text-sm;
     }
 }
 
+.placeholder {
+    @apply flex flex-col items-center justify-center h-full text-center gap-3 py-6;
+}
+.placeholderIcon {
+    @apply w-16 h-16 rounded-full bg-surface-container flex items-center justify-center;
+}
+.bigMic {
+    @apply text-3xl text-on-surface-variant;
+}
+.placeholderText {
+    @apply font-label text-xs text-on-surface-variant uppercase tracking-widest font-bold;
+}
+.placeholderHint {
+    @apply text-[10px] text-on-surface-variant/60 max-w-[220px] leading-relaxed;
+    font-family: var(--font-body);
+}
+
+.transcriptText {
+    @apply text-sm leading-relaxed;
+    font-family: var(--font-body);
+}
+.finalText {
+    @apply text-on-surface;
+}
+.interimText {
+    @apply text-on-surface-variant italic;
+}
+.cursor {
+    @apply inline-block w-[2px] h-4 bg-secondary ml-[2px] align-middle;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* ── Controls ── */
 .controlsArea {
-    @apply p-6 bg-surface-container border-t border-outline-variant/50 flex flex-col items-center justify-center;
+    @apply p-5 bg-surface-container border-t border-outline-variant/50 flex flex-col items-center gap-4;
 }
 
 .waveform {
-    @apply flex items-end justify-center gap-[4px] h-12 mb-6;
+    @apply flex items-end justify-center gap-[3px] h-12 w-full;
+}
+.bar {
+    @apply w-[3px] rounded-sm bg-outline-variant/40;
+    min-height: 4px;
+    transition: background-color 0.3s ease;
+}
+.barActive {
+    @apply bg-secondary;
+}
 
-    .bar {
-        @apply w-1 rounded-sm bg-secondary;
-        transition: height 0.1s ease;
-        /* Dynamic height is applied via inline styles in React or classes */
-        animation: eq 1s infinite alternate ease-in-out;
+.volumeMeter {
+    @apply w-full flex items-center gap-2;
+}
+.volumeLabel {
+    @apply font-label text-[9px] text-on-surface-variant uppercase tracking-widest whitespace-nowrap;
+}
+.volumeTrack {
+    @apply flex-1 h-[3px] bg-surface-container-highest rounded-full overflow-hidden;
+}
+.volumeFill {
+    @apply h-full bg-secondary rounded-full;
+}
+
+.controlRow {
+    @apply flex flex-col items-center gap-2;
+}
+
+.mainBtn {
+    @apply relative w-16 h-16 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-lg cursor-pointer transition-all;
+    &:hover {
+        @apply scale-105;
     }
-
-    /* Stagger the animation so they dont move in sync */
-    .bar:nth-child(even) { animation-duration: 0.8s; }
-    .bar:nth-child(3n) { animation-duration: 1.2s; }
-    .bar:nth-child(5n) { animation-duration: 0.6s; }
+    &:active {
+        @apply scale-95;
+    }
+    &.recording {
+        @apply bg-red-500;
+    }
+}
+.btnInner {
+    @apply relative z-10 flex items-center justify-center;
+}
+.btnIcon {
+    @apply text-2xl;
+}
+.pulseRing {
+    @apply absolute inset-0 rounded-full border-2 border-red-500;
 }
 
-@keyframes eq {
-    0% { transform: scaleY(0.4); }
-    100% { transform: scaleY(1); }
+.recordingLabel {
+    @apply font-label text-[10px] text-red-500 uppercase tracking-widest font-bold;
 }
 
-.pauseBtn {
-    @apply w-16 h-16 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-lg hover:scale-105 transition-transform active:scale-95 cursor-pointer;
+.clearBtn {
+    @apply font-label text-[10px] text-on-surface-variant uppercase tracking-widest hover:text-on-surface transition-colors cursor-pointer underline;
 }
