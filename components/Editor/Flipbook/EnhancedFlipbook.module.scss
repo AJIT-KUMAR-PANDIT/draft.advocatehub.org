@@ -1,0 +1,339 @@
+.flipbookContainer {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.flipbookHeader {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+    .title {
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .headerActions {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .pageIndicator {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
+
+        .separator {
+            opacity: 0.7;
+        }
+    }
+
+    .downloadActions {
+        display: flex;
+        gap: 12px;
+
+        .downloadBtn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+
+            &:hover:not(:disabled) {
+                background: rgba(255, 255, 255, 0.3);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            .loading {
+                animation: pulse 1s infinite;
+            }
+        }
+
+        .pdfBtn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+
+            &:hover:not(:disabled) {
+                box-shadow: 0 4px 12px rgba(240, 147, 251, 0.4);
+            }
+        }
+
+        .docxBtn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+
+            &:hover:not(:disabled) {
+                box-shadow: 0 4px 12px rgba(79, 172, 254, 0.4);
+            }
+        }
+    }
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.controlBtn {
+    padding: 12px 24px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: white;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(10px);
+
+    &:hover:not(:disabled) {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    span {
+        font-size: 1.2rem;
+    }
+}
+
+.prevBtn {
+    background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+}
+
+.nextBtn {
+    background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+}
+
+.resetBtn {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.flipbookView {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    perspective: 1500px;
+    padding: 20px 0;
+    min-height: 1000px;
+    overflow-y: auto;
+    max-height: calc(100vh - 300px);
+}
+
+.pageStack {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+    perspective: 2000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page {
+    position: absolute;
+    width: 100%;
+    max-width: 700px;
+    min-height: 994px;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: left center;
+    backface-visibility: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+
+    &.flipped {
+        transform: rotateY(-180deg);
+    }
+
+    &.current {
+        z-index: 10;
+    }
+
+    &.next {
+        z-index: 5;
+        transform: scale(0.95) rotateY(5deg);
+        opacity: 0.7;
+    }
+
+    &.flipped.next {
+        opacity: 0.4;
+        transform: scale(0.85) rotateY(10deg);
+    }
+}
+
+.pageNavigation {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        border-color: rgba(255, 255, 255, 0.8);
+        transform: scale(1.2);
+    }
+
+    &.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-color: transparent;
+        box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+    }
+}
+
+.completeBanner {
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(132, 250, 176, 0.4);
+
+    .completeContent {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #1a1a2e;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .checkmark {
+        font-size: 1.5rem;
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+    .flipbookContainer {
+        padding: 15px;
+    }
+
+    .flipbookHeader {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+
+        .headerActions {
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .pageIndicator {
+            font-size: 0.9rem;
+        }
+
+        .downloadActions {
+            .downloadBtn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
+    }
+
+    .controls {
+        gap: 10px;
+
+        .controlBtn {
+            padding: 10px 18px;
+            font-size: 0.85rem;
+
+            span {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    .page {
+        min-height: 800px;
+    }
+
+    .pageNavigation {
+        gap: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .flipbookHeader {
+        .title {
+            font-size: 1.2rem;
+        }
+
+        .downloadActions {
+            .downloadBtn {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+
+                span {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .controls {
+        .controlBtn {
+            padding: 8px 14px;
+            font-size: 0.8rem;
+        }
+    }
+}

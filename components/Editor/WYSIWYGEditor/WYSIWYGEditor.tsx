@@ -10,6 +10,11 @@ export interface WYSIWYGEditorRef {
     insertHTML: (html: string) => void;
     getHTML: () => string;
     focus: () => void;
+    setContent: (html: string) => void;
+}
+
+interface WYSIWYGEditorProps {
+    onPlainTextChange?: (text: string) => void;
 }
 
 interface ToolbarButton {
@@ -77,13 +82,42 @@ const TEXT_COLORS = [
     { label: 'Purple', value: '#7c3aed' },
 ];
 
-const WYSIWYGEditor = forwardRef<WYSIWYGEditorRef>(function WYSIWYGEditor(_, ref) {
+const WYSIWYGEditor = forwardRef<WYSIWYGEditorRef, WYSIWYGEditorProps>(function WYSIWYGEditor({
+    onPlainTextChange,
+}, ref) {
     const editorRef = useRef<HTMLDivElement>(null);
     const [activeFormats, setActiveFormats] = useState<Set<string>>(new Set());
     const [wordCount, setWordCount] = useState(0);
     const [charCount, setCharCount] = useState(0);
     const [showColorPicker, setShowColorPicker] = useState<'text' | 'highlight' | null>(null);
     const [lastSaved, setLastSaved] = useState<string | null>(null);
+
+    const updateActiveFormats = useCallback(() => {
+        const formats = new Set<string>();
+        if (document.queryCommandState('bold')) formats.add('bold');
+        if (document.queryCommandState('italic')) formats.add('italic');
+        if (document.queryCommandState('underline')) formats.add('underline');
+        if (document.queryCommandState('strikeThrough')) formats.add('strikeThrough');
+        if (document.queryCommandState('insertUnorderedList')) formats.add('insertUnorderedList');
+        if (document.queryCommandState('insertOrderedList')) formats.add('insertOrderedList');
+        if (document.queryCommandState('justifyLeft')) formats.add('justifyLeft');
+        if (document.queryCommandState('justifyCenter')) formats.add('justifyCenter');
+        if (document.queryCommandState('justifyRight')) formats.add('justifyRight');
+        if (document.queryCommandState('justifyFull')) formats.add('justifyFull');
+        setActiveFormats(formats);
+    }, []);
+
+    const emitPlainTextChange = useCallback(() => {
+        onPlainTextChange?.(editorRef.current?.innerText || '');
+    }, [onPlainTextChange]);
+
+    const updateCounts = useCallback(() => {
+        if (!editorRef.current) return;
+        const text = editorRef.current.innerText || '';
+        const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+        setWordCount(words.length);
+        setCharCount(text.length);
+    }, []);
 
     // Expose methods for parent to insert dictated text
     useImperativeHandle(ref, () => ({
@@ -106,6 +140,8 @@ const WYSIWYGEditor = forwardRef<WYSIWYGEditorRef>(function WYSIWYGEditor(_, ref
                 editorRef.current.innerHTML += text;
             }
             updateCounts();
+            updateActiveFormats();
+            emitPlainTextChange();
         },
         insertHTML: (html: string) => {
             if (!editorRef.current) return;
@@ -134,10 +170,20 @@ const WYSIWYGEditor = forwardRef<WYSIWYGEditorRef>(function WYSIWYGEditor(_, ref
                 editorRef.current.innerHTML += html;
             }
             updateCounts();
+            updateActiveFormats();
+            emitPlainTextChange();
         },
         getHTML: () => editorRef.current?.innerHTML || '',
         focus: () => editorRef.current?.focus(),
-    }));
+        setContent: (html: string) => {
+            if (editorRef.current) {
+                editorRef.current.innerHTML = html;
+                updateCounts();
+                updateActiveFormats();
+                emitPlainTextChange();
+            }
+        },
+    }), [emitPlainTextChange, updateCounts, updateActiveFormats]);
 
     const execCommand = useCallback((command: string, value?: string) => {
         if (command === 'formatBlock' && value) {
@@ -147,30 +193,7 @@ const WYSIWYGEditor = forwardRef<WYSIWYGEditorRef>(function WYSIWYGEditor(_, ref
         }
         editorRef.current?.focus();
         updateActiveFormats();
-    }, []);
-
-    const updateActiveFormats = useCallback(() => {
-        const formats = new Set<string>();
-        if (document.queryCommandState('bold')) formats.add('bold');
-        if (document.queryCommandState('italic')) formats.add('italic');
-        if (document.queryCommandState('underline')) formats.add('underline');
-        if (document.queryCommandState('strikeThrough')) formats.add('strikeThrough');
-        if (document.queryCommandState('insertUnorderedList')) formats.add('insertUnorderedList');
-        if (document.queryCommandState('insertOrderedList')) formats.add('insertOrderedList');
-        if (document.queryCommandState('justifyLeft')) formats.add('justifyLeft');
-        if (document.queryCommandState('justifyCenter')) formats.add('justifyCenter');
-        if (document.queryCommandState('justifyRight')) formats.add('justifyRight');
-        if (document.queryCommandState('justifyFull')) formats.add('justifyFull');
-        setActiveFormats(formats);
-    }, []);
-
-    const updateCounts = useCallback(() => {
-        if (!editorRef.current) return;
-        const text = editorRef.current.innerText || '';
-        const words = text.trim().split(/\s+/).filter(w => w.length > 0);
-        setWordCount(words.length);
-        setCharCount(text.length);
-    }, []);
+    }, [updateActiveFormats]);
 
     const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
         // Keyboard shortcuts
@@ -195,14 +218,16 @@ const WYSIWYGEditor = forwardRef<WYSIWYGEditorRef>(function WYSIWYGEditor(_, ref
     const handleInput = useCallback(() => {
         updateCounts();
         updateActiveFormats();
-    }, [updateCounts, updateActiveFormats]);
+        emitPlainTextChange();
+    }, [emitPlainTextChange, updateCounts, updateActiveFormats]);
 
     // Set initial default content
     useEffect(() => {
         if (editorRef.current && !editorRef.current.innerHTML.trim()) {
             editorRef.current.innerHTML = '<p><br></p>';
+            emitPlainTextChange();
         }
-    }, []);
+    }, [emitPlainTextChange]);
 
     // Close color picker on click outside
     useEffect(() => {
@@ -220,7 +245,7 @@ const WYSIWYGEditor = forwardRef<WYSIWYGEditorRef>(function WYSIWYGEditor(_, ref
             {/* Toolbar */}
             <div className={styles.toolbar} id="wysiwyg-toolbar">
                 {/* Font family selector */}
-                <select 
+                <select
                     className={styles.fontSelect}
                     onChange={(e) => execCommand('fontName', e.target.value)}
                     defaultValue="Newsreader, serif"
@@ -232,7 +257,7 @@ const WYSIWYGEditor = forwardRef<WYSIWYGEditorRef>(function WYSIWYGEditor(_, ref
                 </select>
 
                 {/* Font size selector */}
-                <select 
+                <select
                     className={styles.sizeSelect}
                     onChange={(e) => execCommand('fontSize', e.target.value)}
                     defaultValue="3"

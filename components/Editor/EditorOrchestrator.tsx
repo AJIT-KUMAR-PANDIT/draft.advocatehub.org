@@ -13,11 +13,13 @@ import LLMTextInput from './LLMTextInput/LLMTextInput';
 import AnimatedIcon from '@nakprc/components/UI/AnimatedIcon';
 import Link from 'next/link';
 import { useAutoFormat } from '@nakprc/hooks/useAutoFormat';
+import EnhancedFlipbook from './Flipbook/EnhancedFlipbook';
 
 export default function EditorOrchestrator() {
     const [voiceCollapsed, setVoiceCollapsed] = useState(false);
     const editorRef = useRef<WYSIWYGEditorRef>(null);
     const pendingTextRef = useRef<string>('');
+    const [showcaseContent, setShowcaseContent] = useState('');
 
     const {
         formatText,
@@ -31,6 +33,10 @@ export default function EditorOrchestrator() {
         autoFormat,
         setAutoFormat,
     } = useAutoFormat();
+
+    const handleEditorPlainTextChange = useCallback((plainText: string) => {
+        setShowcaseContent(plainText);
+    }, []);
 
     // When voice recognition returns final text, auto-format via LLM then insert into WYSIWYG
     const handleTranscript = useCallback(async (text: string, isFinal: boolean) => {
@@ -106,9 +112,9 @@ export default function EditorOrchestrator() {
     return (
         <div className={styles.layout}>
             <Sidebar activeTab="drafting_room" />
-            
+
             <main className={styles.mainContent}>
-                <EditorHeader 
+                <EditorHeader
                     provider={provider}
                     setProvider={setProvider}
                     providers={providers}
@@ -117,10 +123,10 @@ export default function EditorOrchestrator() {
                     isFormatting={isFormatting}
                     lastModel={lastModel}
                 />
-                
+
                 <section className={styles.workspace}>
                     {/* Voice Dictation Panel */}
-                    <VoiceInput 
+                    <VoiceInput
                         onTranscript={handleTranscript}
                         onRecordingStop={handleRecordingStop}
                         isCollapsed={voiceCollapsed}
@@ -156,7 +162,10 @@ export default function EditorOrchestrator() {
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-                            <WYSIWYGEditor ref={editorRef} />
+                            <WYSIWYGEditor
+                                ref={editorRef}
+                                onPlainTextChange={handleEditorPlainTextChange}
+                            />
                         </div>
 
                         {/* LLM Text Input — type/paste text for auto-formatting */}
@@ -168,6 +177,20 @@ export default function EditorOrchestrator() {
                     </div>
 
                     <MetadataSidebar />
+                </section>
+
+                {/* Enhanced Flipbook Showcase Area */}
+                <section className={styles.showcaseArea}>
+                    <div className={styles.showcaseHeader}>
+                        <h3>Document Preview</h3>
+                        <p className={styles.showcaseSubtitle}>View and download your document</p>
+                    </div>
+
+                    <EnhancedFlipbook
+                        content={showcaseContent}
+                        title="Document Preview"
+                        autoFlip={true}
+                    />
                 </section>
             </main>
 
