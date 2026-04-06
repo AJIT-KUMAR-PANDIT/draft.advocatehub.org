@@ -2,7 +2,7 @@
 
 .container {
     @apply fixed left-1/2 z-40 flex w-full max-w-3xl flex-col items-center px-4;
-    bottom: 15.25rem;
+    // bottom: 15.25rem;
     transform: translateX(-50%);
 }
 
@@ -103,7 +103,7 @@
 
 @media (max-width: 900px) {
     .container {
-        bottom: 15.5rem;
+        // bottom: 15.5rem;
     }
 
     .shell {
